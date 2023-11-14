@@ -1,4 +1,4 @@
--- An Applescript that mutes/unmutes Google Meet and Zoom meetings
+-- An Applescript that mutes/unmutes Google Meet, Teams, and Zoom meetings
 
 -- get the currently active application so we can return focus to it
 tell application "System Events"
@@ -57,6 +57,15 @@ tell application "System Events"
 			-- Send keystroke to mute/unmute in Zoom
 			keystroke "a" using {command down, shift down}
 		end if
+	end if
+
+	-- Microsoft Teams
+	-- Remarkably, Teams is the easiest.
+	-- Just switch to it and send the command. It doesn't care if a meeting is active or not.
+	if (exists (process "Microsoft Teams")) then
+		tell application "Microsoft Teams" to activate
+		delay 0.1
+		keystroke "m" using {command down, shift down}
 	end if
 end tell
 
